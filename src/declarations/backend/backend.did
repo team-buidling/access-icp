@@ -1,0 +1,46 @@
+type UserData = 
+ record {
+   birthDate: text;
+   email: text;
+   firstName: text;
+   id: nat;
+   lastName: text;
+   "principal": principal;
+   wallet: nat;
+ };
+type TransformArgs = 
+ record {
+   context: blob;
+   response: HttpResponsePayload;
+ };
+type Main = 
+ service {
+   deductWallet: (text, nat) -> (bool);
+   getAllAcocunts: () -> (vec UserData);
+   initiateUserData: (text) -> (UserData);
+   replenishWallet: (text, nat) -> (bool);
+   transform: (TransformArgs) -> (CanisterHttpResponsePayload) query;
+ };
+type HttpResponsePayload = 
+ record {
+   body: vec nat8;
+   headers: vec HttpHeader;
+   status: nat;
+ };
+type HttpHeader__1 = 
+ record {
+   name: text;
+   value: text;
+ };
+type HttpHeader = 
+ record {
+   name: text;
+   value: text;
+ };
+type CanisterHttpResponsePayload = 
+ record {
+   body: vec nat8;
+   headers: vec HttpHeader__1;
+   status: nat;
+ };
+service : () -> Main

@@ -5,12 +5,11 @@
             "type": "motoko"
         },
         "frontend": {
+            "dependencies": ["backend"],
             "frontend": {
-                "entrypoint": "src/frontend/index.html"
+              "entrypoint": "src/frontend/index.html"
             },
-            "source": [
-                "src/frontend"
-            ],
+            "source": ["src/frontend/dist"],
             "type": "assets"
         }
     },

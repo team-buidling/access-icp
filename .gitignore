@@ -1,2 +1,5 @@
 .mops
 .dfx
+node_modules
+out
+dist
