@@ -1,0 +1,4 @@
+[dependencies]
+base = "0.11.2"
+certified-cache = "0.3.0"
+icrc7-mo = "0.4.1"

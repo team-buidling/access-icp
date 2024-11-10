@@ -1,0 +1,56 @@
+module HttpTypes {
+    public type Cycles = Nat;
+
+    public let HTTP_REQUEST_CYCLES_COST : Cycles = 20_949_972_000;
+
+    public type HttpRequestArgs = {
+        url : Text;
+        max_response_bytes : ?Nat64;
+        headers : [HttpHeader];
+        body : ?[Nat8];
+        method : HttpMethod;
+        transform : ?TransformRawResponseFunction;
+    };
+
+    public type HttpHeader = {
+        name : Text;
+        value : Text;
+    };
+
+    public type HttpMethod = {
+        #get;
+        #post;
+        #head;
+    };
+
+    public type HttpResponsePayload = {
+        status : Nat;
+        headers : [HttpHeader];
+        body : [Nat8];
+    };
+
+    public type TransformRawResponseFunction = {
+        function : shared query TransformArgs -> async HttpResponsePayload;
+        context : Blob;
+    };
+
+    public type TransformArgs = {
+        response : HttpResponsePayload;
+        context : Blob;
+    };
+
+    public type CanisterHttpResponsePayload = {
+        status : Nat;
+        headers : [HttpHeader];
+        body : [Nat8];
+    };
+
+    public type TransformContext = {
+        function : shared query TransformArgs -> async HttpResponsePayload;
+        context : Blob;
+    };
+
+    public type IC = actor {
+        http_request : HttpRequestArgs -> async HttpResponsePayload;
+    };
+};
